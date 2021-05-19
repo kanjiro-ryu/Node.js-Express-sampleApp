@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+    h3 今日ののTODO
+        if !!todos
+            ul
+                each todo in todos
+                    li
+                    p #{todo.title}
+                    p #{todo.description}
+                    p #{todo.status}
+                    p #{todo.estimatedDate}
+                    p
+                        | [
+                        a(href='') 編集
+                        | ]
+                    p
+                        | [
+                        a(href='') 削除
+                        | ]

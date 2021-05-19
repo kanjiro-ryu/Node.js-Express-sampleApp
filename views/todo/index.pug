@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    h3 残りのTODO
+        if !!todos
+            ul
+                each todo in todos
+                    li
+                    p #{todo.title}
+                    p #{todo.description}
+                    p #{todo.status}
+                    p #{todo.estimatedDate}
+                    p
+                        | [
+                        a(href=`/todo/update/${todo._id}`) 編集
+                        | ]
+                    form(method='POST' action=`/todo/${todo._id}?_method=DELETE`)
+                        div
+                            span [
+                            input(
+                                type='submit'
+                                value='削除'
+                                style={
+                                    'border': 'none',
+                                    'padding': 0,
+                                    'font-size': '14px',
+                                    'text-decoration': 'underline',
+                                    'color': '#00B7FF'
+                                })
+                            span ]
