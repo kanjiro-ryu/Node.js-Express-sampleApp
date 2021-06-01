@@ -7,6 +7,8 @@ const createError = require('http-errors'),
     usersRouter = require('./routes/users'),
     mongoose = require('mongoose'),
     methodOverride = require("method-override"),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
     app = express();
 
 mongoose.connect('mongodb://localhost:27017/test_db', {
@@ -23,10 +25,57 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser());
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method")); //ルーティングの前に書く
+
+
+const session = require('express-session');
+app.use(session({
+  secret: 'cookie_secret',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+const User = require('./models/users');
+passport.use(new LocalStrategy({
+  userNameField:'username',
+  passwordField:'password',
+  passReqToCallback: false,
+  session: false,//ここfalseでLogin処理時にsessionを有効?
+},function(username, password, done){
+  //ここで username と password を確認して結果を返す
+  console.log(username)
+  console.log(password)
+  User.findOne({ name: username }, function (err, user) {
+    if (err) { return done(err); }
+    if (!user) return done(null, false, { message: 'ユーザーIDが正しくありません。' });
+    if( user.password !== password ) return done(null, false, {message: 'パスワードが正しくありません'})
+    // if (!user.validPassword(password)) {
+    //   return done(null, false, { message: 'パスワードが正しくありません。' });
+    // }
+    return done(null, user);
+  });
+}));
+
+passport.serializeUser(function(user, done) {
+  console.log('シリアライズ')
+  console.log(user)
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  console.log('デシリアライズ')
+  console.log(user)
+  done(null, user);
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

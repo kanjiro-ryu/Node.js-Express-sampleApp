@@ -8,11 +8,20 @@
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
 
-<form>
-    <input type="text">
+<form action="/login" method="post">
+    <div>
+        <label>ユーザーID：</label>
+        <input type="text" name="username"/>
+    </div>
     <br/>
+    <div>
+        <label>パスワード：</label>
+        <input type="password" name="password"/>
+    </div>
     <br/>
-    <input type="submit">
+    <div>
+        <input type="submit" value="ログイン"/>
+    </div>
 </form>
 
 <br/>
