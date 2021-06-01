@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UserList</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<a href="/register">
+    <button type="button">
+        to Register Page
+    </button>
+</a>
+
+<a href="/users/">
+    <button type="button">
+        BACK
+    </button>
+</a>
+<hr>
+
+<p>id : <%= content._id %></p>
+<p>name : <%= content.name %></p>
+<p>password : <%= content.password %></p>
+<p>email : <%= content.email %></p>
+
+<br/>
+
+<form method="post" action="/users/update/<%= content._id%>">
+    <input type="text" name="name" placeholder="name">
+    <br/>
+    <br/>
+    <input type="text" name="email" placeholder="email">
+    <br/>
+    <br/>
+    <input type="text" name="password" placeholder="password">
+    <br/>
+    <br/>
+    <input type="submit" value="変更">
+</form>
+
+</body>
+</html>

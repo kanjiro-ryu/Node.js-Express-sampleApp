@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UserList</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<a href="/register">
+    <button type="button">
+        to Register Page
+    </button>
+</a>
+
+<a href="/">
+    <button type="button">
+        to Login Page
+    </button>
+</a>
+<hr>
+
+<% user.forEach( (u) =>{ %>
+    <p>id : <%= u._id %></p>
+    <p>name : <%= u.name %></p>
+    <p>password : <%= u.password %></p>
+    <p>email : <%= u.email %></p>
+    <a href="/users/<%= u._id %>">
+        <button type="button">
+            update
+        </button>
+    </a>
+    <form method="post" action="/users/delete/<%= u._id%>?_method=DELETE">
+        <button type="submit">
+            delete
+        </button>
+    </form>
+    <hr>
+<% })%>
+
+<br/>
+
+
+</body>
+</html>
