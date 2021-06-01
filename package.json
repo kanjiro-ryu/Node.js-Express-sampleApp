@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css"
   },
   "dependencies": {
+    "autoprefixer": "^10.2.6",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -19,6 +21,9 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "postcss": "^8.3.0",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.2"
   }
 }
