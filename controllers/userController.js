@@ -3,6 +3,7 @@ const User = require('../models/users');
 exports.getAllUsers = (req,res) => {
     User.find({},(error, result )=>{
         console.log(result)
+        console.log(result[0]._id.getTimestamp())
         if(!error) res.render('users/index', {
             user:result
         })
@@ -20,12 +21,12 @@ exports.getUserDetail = (req, res) =>{
     })
 }
 exports.createUser = (req,res) => {
+    console.log(req.body)
     User.create({
         name:req.body.name,
         password:req.body.password,
         email:req.body.email,
-        image:"",
-        content:''
+        image:req.body.image,
     },(error, result )=>{
         if(error) console.log(error)
         else

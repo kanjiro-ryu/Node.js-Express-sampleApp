@@ -1,12 +1,12 @@
+.usertext {
+  color: #004444; }
+
 body {
+  background-color: #e1e5ea;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  body a {
+    color: #00B7FF; }
+  body p {
+    color: cadetblue; }
 
-a {
-  color: #00B7FF;
-}
-
-p {
-  color: cadetblue;
-}

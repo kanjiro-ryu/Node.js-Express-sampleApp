@@ -1,0 +1,23 @@
+// 変数を定義
+$my-color: #e1e5ea;
+
+$color1: #00B7FF;
+$color2: cadetblue;
+
+.usertext{
+  color: #004444;
+}
+
+body {
+  background-color: $my-color;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  a {
+    color: $color1;
+  }
+  p {
+    color: $color2;
+  }
+}
+
+

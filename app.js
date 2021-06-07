@@ -5,6 +5,7 @@ const createError = require('http-errors'),
     logger = require('morgan'),
     indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users'),
+    tweetsRouter = require('./routes/tweets'),
     mongoose = require('mongoose'),
     methodOverride = require("method-override"),
     passport = require('passport'),
@@ -78,6 +79,8 @@ passport.deserializeUser(function(user, done) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/tweets', tweetsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

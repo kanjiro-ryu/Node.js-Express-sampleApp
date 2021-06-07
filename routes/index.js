@@ -8,7 +8,7 @@ router.get('/', (req, res, next)=> {
 });
 router.post('/login', passport.authenticate('local',{
   failureRedirect: '/register',  // 失敗したときの遷移先
-  successRedirect: '/users/', // 成功したときの遷移先
+  successRedirect: '/tweets/', // 成功したときの遷移先
   session:true
 }))
 
