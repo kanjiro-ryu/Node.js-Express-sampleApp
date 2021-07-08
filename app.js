@@ -4,10 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+
 //Mongooseの導入
 var mongoose = require('mongoose');
-// 追加
-var methodOverride = require('method-override')
+var constants = require('./lib/constants');
+mongoose.connect(constants.DB_URL + constants.DB_NAME, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
+// // 追加
+// var methodOverride = require('method-override')
 
 
 var indexRouter = require('./routes/index');
@@ -17,15 +23,15 @@ var todoRouter = require('./routes/todo');
 var app = express();
 
 
-var MongoClient = require('mongodb').MongoClient;
-MongoClient.connect(
-    'mongodb://127.0.0.1:27017/express-todo-tutorial',
-    { useNewUrlParser: true },
-    function(err, client) {
-      console.log("Connected successfully to DB");
-      client.close();
-    }
-);
+// var MongoClient = require('mongodb').MongoClient;
+// MongoClient.connect(
+//     'mongodb://127.0.0.1:27017/express-todo-tutorial',
+//     { useNewUrlParser: true },
+//     function(err, client) {
+//       console.log("Connected successfully to DB");
+//       client.close();
+//     }
+// );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,7 +50,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 追加
-app.use(methodOverride('_method'))
+// app.use(methodOverride('_method'))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/home', homeRouter);
